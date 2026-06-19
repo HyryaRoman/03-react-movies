@@ -1,9 +1,10 @@
-// import css from "./App.module.css";
+import SearchBar from "../SearchBar/SearchBar.tsx";
+import styles from "./App.module.css";
 
 export default function App() {
   return (
     <>
-      <h1>Hello world!</h1>
+      <SearchBar onSubmit={(q: string) => console.log(q)} />
     </>
   );
 }
