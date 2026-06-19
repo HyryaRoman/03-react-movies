@@ -20,8 +20,8 @@ export async function fetchMovies(
     return [
       {
         id: 1,
-        poster_path: "",
-        backdrop_path: "",
+        poster_path: null,
+        backdrop_path: null,
         title: "Dummy Movie",
         overview: "Lorem ipsum dolor dit amen",
         release_date: "2026/06/19",
