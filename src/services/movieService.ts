@@ -2,8 +2,8 @@ import axios from "axios";
 import type { AxiosInstance } from "axios";
 import type { Movie } from "../types/movie.ts";
 
-const TMDB_API_KEY = import.meta.env.TMDB_API_KEY;
-const DEBUG_MODE = import.meta.env.DEBUG_MODE || false;
+const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+const FAKE_TMDB = import.meta.env.VITE_FAKE_TMDB === "true";
 
 const tmdb: AxiosInstance = axios.create({
   baseURL: `https://api.themoviedb.org/3/`,
@@ -16,12 +16,22 @@ export async function fetchMovies(
   query: string,
   page: number = 0,
 ): Promise<Movie[]> {
-  if (!DEBUG_MODE) {
+  if (FAKE_TMDB) {
+    return [
+      {
+        id: 1,
+        poster_path: "",
+        backdrop_path: "",
+        title: "Dummy Movie",
+        overview: "Lorem ipsum dolor dit amen",
+        release_date: "2026/06/19",
+        vote_average: 4.9,
+      },
+    ];
+  } else {
     const response = await tmdb.get("/search/movie", {
       params: { query, page },
     });
     return response.data.results;
-  } else {
-    return [];
   }
 }
