@@ -17,11 +17,12 @@ export async function fetchMovies(
   page: number = 0,
 ): Promise<Movie[]> {
   if (FAKE_TMDB) {
+    await new Promise(res => setTimeout(res, 2000));
     return [
       {
         id: 1,
-        poster_path: null,
-        backdrop_path: null,
+        poster_path: "#",
+        backdrop_path: "#",
         title: "Dummy Movie",
         overview: "Lorem ipsum dolor dit amen",
         release_date: "2026/06/19",
