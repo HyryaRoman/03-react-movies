@@ -8,13 +8,17 @@ const FAKE_TMDB = import.meta.env.VITE_FAKE_TMDB === "true";
 const tmdb: AxiosInstance = axios.create({
   baseURL: `https://api.themoviedb.org/3/`,
   headers: {
-    Authorization: TMDB_API_KEY,
+    Authorization: `Bearer ${TMDB_API_KEY}`,
   },
 });
 
+interface SearchResponse {
+  results: Movie[];
+}
+
 export async function fetchMovies(
   query: string,
-  page: number = 0,
+  page: number = 1,
 ): Promise<Movie[]> {
   if (FAKE_TMDB) {
     await new Promise(res => setTimeout(res, 2000));
@@ -30,7 +34,7 @@ export async function fetchMovies(
       },
     ];
   } else {
-    const response = await tmdb.get("/search/movie", {
+    const response = await tmdb.get<SearchResponse>("/search/movie", {
       params: { query, page },
     });
     return response.data.results;
