@@ -11,7 +11,7 @@ interface MovieModalProps {
 
 export default function MovieModal({ movie, onClose }: MovieModalProps) {
   useEffect(() => {
-    function onKeyDown(e: React.KeyboardEvent) {
+    function onKeyDown(e: KeyboardEvent) {
       if (e.key === "Escape") onClose();
     }
 
