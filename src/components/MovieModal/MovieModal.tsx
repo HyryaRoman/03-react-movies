@@ -16,8 +16,12 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
     }
 
     document.addEventListener("keydown", onKeyDown);
+    document.body.style.overflow = "hidden";
 
-    return () => document.removeEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+      document.body.style.overflow = "";
+    };
   }, [onClose]);
 
   function onClick(ev: React.MouseEvent<HTMLElement>) {

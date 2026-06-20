@@ -21,7 +21,7 @@ export async function fetchMovies(
   page: number = 1,
 ): Promise<Movie[]> {
   if (FAKE_TMDB) {
-    await new Promise(res => setTimeout(res, 2000));
+    await new Promise((res) => setTimeout(res, 2000));
     return [
       {
         id: 1,
